@@ -136,8 +136,9 @@ title('Thrust vs Time');
 xticks(0:0.05:0.2);
 xline(Phase2Time, '--', 'Color', 'blue', Label={'Phase 2'})
 xline(Phase3Time, '--', 'Color', 'blue', Label={'Phase 3'})
+yline(max(Thrust), '--', 'Color', 'blue', Label={'Max Thrust'})
 xlim([0 0.2]);
-ylim([0 max(Thrust)]);
+ylim([0 max(Thrust)+10]);
 grid on;
 grid minor;
 

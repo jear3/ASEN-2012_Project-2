@@ -1,5 +1,11 @@
 %% Initialize test/verification data
-clc; clear; close all;
+clc; clear; close all; load project2verification.mat;
+%% Set Height, Distance, Thrust, and Time data for verification
+heigthVerify = verification.height();
+distanceVerify = verification.distance();
+thrustVerify = verification.thrust();
+timeVerify = verification.time();
+
 
 %% Get Constants and Attach Changing Variables 
 
@@ -116,6 +122,8 @@ fprintf("\nActual Max Height: %2.1f ", maxHeight);
 
 % Trajectory Plot
 figure;
+plot(distanceVerify, heigthVerify, 'b-', 'LineWidth', 4)
+hold on;
 plot(state(:, 1), state(:, 3), 'Color', '[0.4940, 0.1840, 0.5560]', 'LineWidth', 2, LineStyle='-');
 xlabel('Distance (m)');
 ylabel('Height (m)');
@@ -124,11 +132,14 @@ xline(Phase2Dist, '--', 'Color', 'blue', Label={'Phase 2'})
 xline(Phase3Dist, '--', 'Color', 'blue', Label={'Phase 3'})
 xlim([0 95]);
 ylim([0 30]);
+legend("Verification Data", "Current Data", Location="northwest");
 grid on;
 grid minor;
 
 % Thrust vs Time Plot
 figure;
+plot(timeVerify, thrustVerify, 'b-', 'LineWidth', 4);
+hold on;
 plot(t, Thrust, 'Color', '[0.4940, 0.1840, 0.5560]', 'LineWidth', 2, LineStyle='-'); 
 xlabel('Time (s)');
 ylabel('Thrust (N)');
@@ -139,6 +150,7 @@ xline(Phase3Time, '--', 'Color', 'blue', Label={'Phase 3'})
 yline(max(Thrust), '--', 'Color', 'blue', Label={'Max Thrust'})
 xlim([0 0.2]);
 ylim([0 max(Thrust)+10]);
+legend("Verification Data", "Current Data", Location="best");
 grid on;
 grid minor;
 
